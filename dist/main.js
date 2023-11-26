@@ -143,7 +143,7 @@ function processResponse(dataGraphQL) {
             groupId,
             joiningText || '',
             profileType,
-            points
+            points?.split('points')[0]?.trim() || ''
         ];
     });
     (_a = window.members_list).push.apply(_a, membersData);
