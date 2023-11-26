@@ -41,7 +41,8 @@ window.members_list = window.members_list || [[
         'Image Src',
         'Groupe Id',
         'Group Joining Text',
-        'Profile Type'
+        'Profile Type',
+        'Group Points'
     ]];
 // Add a Download button to export parsed member into a CSV file
 function buildCTABtn() {
@@ -131,6 +132,8 @@ function processResponse(dataGraphQL) {
         var joiningText = ((_a = memberNode === null || memberNode === void 0 ? void 0 : memberNode.join_status_text) === null || _a === void 0 ? void 0 : _a.text) || ((_c = (_b = memberNode === null || memberNode === void 0 ? void 0 : memberNode.membership) === null || _b === void 0 ? void 0 : _b.join_status_text) === null || _c === void 0 ? void 0 : _c.text);
         // Facebook Group Id
         var groupId = (_d = memberNode.node.group_membership) === null || _d === void 0 ? void 0 : _d.associated_group.id;
+        // Group Points
+        var points = (_d = memberNode.node.group_membership) === null || _d === void 0 ? void 0 : _d.group_contribution_score_text?.text;
         return [
             id,
             name,
@@ -139,7 +142,8 @@ function processResponse(dataGraphQL) {
             (profile_picture === null || profile_picture === void 0 ? void 0 : profile_picture.uri) || '',
             groupId,
             joiningText || '',
-            profileType
+            profileType,
+            points
         ];
     });
     (_a = window.members_list).push.apply(_a, membersData);
